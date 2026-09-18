@@ -1,0 +1,346 @@
+Rezinamuh 1.0.0 — local execution record, 2026-09-18
+
+This records commands actually executed by Codex. It is not a model-behavior
+verdict. Additional command results are appended after they run.
+Publication redactions: personal absolute paths are replaced with role labels.
+Commands and observed outcomes are otherwise retained.
+
+CWD: <workspace-root>
+$ git status --short
+exit: 128
+fatal: not a git repository (or any of the parent directories): .git
+Interpretation: no git baseline; use direct file inspection and file hashes.
+
+$ shasum -a 256 [private development input filename redacted for publication]
+exit: 0
+8ccc2d39686bd4d595807e70245204315fd62738bc1e65d70e24b48e9dd03ef2  [private development input]
+Role: original user input preservation baseline, before implementation.
+Publication redaction: the filename and non-command source commentary are
+omitted; the digest and command result are unchanged.
+
+$ python3 --version
+exit: 0
+Python 3.9.0
+
+$ python3 <local-skill-creator>/scripts/quick_validate.py <package-root>
+exit: 0
+Skill is valid!
+
+$ shasum -a 256 rezinamuh/SKILL.md
+exit: 0
+6741e8fa99acad24814d87b9cbd9cb190b492e089616ffb5a2f660f7c2203343  rezinamuh/SKILL.md
+Role: candidate skill content hash, not a git commit.
+
+
+Core example review corrected two information-strength issues before model runs.
+Current frozen SKILL SHA-256:
+3cac750daa22f55b27b3245c37435dd5b33ffcf5b1383bf36eea94f56a1c03af
+Frozen cases.json SHA-256:
+bd3848ce00c15860ece359c66a895c32a703a6f73d33fccbfc1a9065594b35ce
+Canonical protected-input.md SHA-256 before file tests:
+f919c718e04b1d1e3e50c998aaf89cb35a2cb14cee2b7a3d925561656bf8ccde
+
+First structure-only run (CWD package root):
+$ python3 scripts/validate_package.py --structure-only
+exit: 1
+ERROR: control_groups.C04: control group requires at least two distinct cases
+FAIL: 1 mechanical check(s) failed
+Resolution before behavioral inputs were frozen: add T01 as the same-source,
+no-style-sample baseline in control group C04. The case inputs were unchanged.
+
+Final-format check after example corrections:
+$ python3 <local-skill-creator>/scripts/quick_validate.py <package-root>
+exit: 0
+Skill is valid!
+
+CWD: <package-root>
+$ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts -p 'test_validate_package.py' -v
+exit: 0
+test_audit_is_not_counted_in_final_length (test_validate_package.ValidatorTests) ... ok
+test_audit_must_have_been_in_raw_response (test_validate_package.ValidatorTests) ... ok
+test_bad_case_dependency (test_validate_package.ValidatorTests) ... ok
+test_bad_control_reference (test_validate_package.ValidatorTests) ... ok
+test_bad_coverage_reference (test_validate_package.ValidatorTests) ... ok
+test_bad_json_is_diagnostic (test_validate_package.ValidatorTests) ... ok
+test_bad_result_case_reference (test_validate_package.ValidatorTests) ... ok
+test_bad_supersedes_reference (test_validate_package.ValidatorTests) ... ok
+test_case_dependency_cycle (test_validate_package.ValidatorTests) ... ok
+test_changed_protected_region (test_validate_package.ValidatorTests) ... ok
+test_cli_exit_codes (test_validate_package.ValidatorTests) ... ok
+test_conflict_requires_public_audit (test_validate_package.ValidatorTests) ... ok
+test_coverage_apply_and_skip_must_match (test_validate_package.ValidatorTests) ... ok
+test_declared_budget_conflict_can_exceed_limit (test_validate_package.ValidatorTests) ... ok
+test_duplicate_protected_region (test_validate_package.ValidatorTests) ... ok
+test_duplicate_rule_number (test_validate_package.ValidatorTests) ... ok
+test_duplicate_version (test_validate_package.ValidatorTests) ... ok
+test_file_case_requires_file_mode (test_validate_package.ValidatorTests) ... ok
+test_file_hash_cannot_replace_commit_field (test_validate_package.ValidatorTests) ... ok
+test_final_must_have_been_in_raw_response (test_validate_package.ValidatorTests) ... ok
+test_fixture_may_not_escape_tests (test_validate_package.ValidatorTests) ... ok
+test_identical_literal_elsewhere_does_not_hide_change (test_validate_package.ValidatorTests) ... ok
+test_latest_matching_hash_record_wins_and_old_failure_remains (test_validate_package.ValidatorTests) ... ok
+test_list_numbers_outside_regions_do_not_fail_global_number_check (test_validate_package.ValidatorTests) ... ok
+test_malformed_params_is_diagnostic_not_exception (test_validate_package.ValidatorTests) ... ok
+test_missing_current_skill_output (test_validate_package.ValidatorTests) ... ok
+test_missing_group (test_validate_package.ValidatorTests) ... ok
+test_missing_high_risk_prohibition (test_validate_package.ValidatorTests) ... ok
+test_missing_marker_even_if_inner_text_preserved (test_validate_package.ValidatorTests) ... ok
+test_missing_mit_warranty (test_validate_package.ValidatorTests) ... ok
+test_missing_required_output_file (test_validate_package.ValidatorTests) ... ok
+test_missing_required_output_record (test_validate_package.ValidatorTests) ... ok
+test_missing_rule_field (test_validate_package.ValidatorTests) ... ok
+test_missing_rule_number (test_validate_package.ValidatorTests) ... ok
+test_missing_upstream_copyright (test_validate_package.ValidatorTests) ... ok
+test_multiple_input_sources_invalid (test_validate_package.ValidatorTests) ... ok
+test_optional_array_cannot_be_null (test_validate_package.ValidatorTests) ... ok
+test_protected_literal_count (test_validate_package.ValidatorTests) ... ok
+test_readme_current_version_must_match (test_validate_package.ValidatorTests) ... ok
+test_readme_slug_must_match (test_validate_package.ValidatorTests) ... ok
+test_record_params_must_match_declared_params (test_validate_package.ValidatorTests) ... ok
+test_reordered_protected_regions (test_validate_package.ValidatorTests) ... ok
+test_reordered_table_rows (test_validate_package.ValidatorTests) ... ok
+test_repeat_cannot_be_replaced_with_fixed_input (test_validate_package.ValidatorTests) ... ok
+test_repeat_cannot_grow (test_validate_package.ValidatorTests) ... ok
+test_repeat_must_use_actual_previous_output (test_validate_package.ValidatorTests) ... ok
+test_required_scenario_cannot_be_removed (test_validate_package.ValidatorTests) ... ok
+test_saved_output_must_match_record_including_final_newline (test_validate_package.ValidatorTests) ... ok
+test_structure_only_does_not_require_execution_artifacts (test_validate_package.ValidatorTests) ... ok
+test_top_level_version (test_validate_package.ValidatorTests) ... ok
+test_unicode_length_counts_codepoints_including_whitespace (test_validate_package.ValidatorTests) ... ok
+test_unrequested_conflict_does_not_bypass_length (test_validate_package.ValidatorTests) ... ok
+test_valid_full_package (test_validate_package.ValidatorTests) ... ok
+test_wrong_slug (test_validate_package.ValidatorTests) ... ok
+test_wrong_version (test_validate_package.ValidatorTests) ... ok
+
+----------------------------------------------------------------------
+Ran 55 tests in 0.444s
+
+OK
+
+$ PYTHONDONTWRITEBYTECODE=1 python3 scripts/validate_package.py --structure-only
+exit: 0
+PASS: structure mechanical checks
+Not checked: semantic equivalence, style quality, independent provenance, remote commit existence, or platform compatibility.
+Front matter validation supports only this package's narrow format, not general YAML.
+
+$ PYTHONDONTWRITEBYTECODE=1 python3 scripts/validate_package.py
+exit: 0
+PASS: structure and recorded outputs mechanical checks
+Not checked: semantic equivalence, style quality, independent provenance, remote commit existence, or platform compatibility.
+Front matter validation supports only this package's narrow format, not general YAML.
+
+Post-generation preservation check (2026-09-18):
+$ shasum -a 256 [private development input filename redacted] SKILL.md tests/fixtures/protected-input.md
+exit: 0
+Private input: 8ccc2d39686bd4d595807e70245204315fd62738bc1e65d70e24b48e9dd03ef2 (unchanged)
+SKILL.md: 3cac750daa22f55b27b3245c37435dd5b33ffcf5b1383bf36eea94f56a1c03af
+Fixture: f919c718e04b1d1e3e50c998aaf89cb35a2cb14cee2b7a3d925561656bf8ccde (unchanged)
+Note: path labels in the command above are publication redactions, not executable paths.
+
+Final repeated checks after publication-path redactions:
+$ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts -p 'test_validate_package.py'
+exit: 0
+.......................................................
+----------------------------------------------------------------------
+Ran 55 tests in 0.403s
+
+OK
+$ PYTHONDONTWRITEBYTECODE=1 python3 scripts/validate_package.py
+exit: 0
+PASS: structure and recorded outputs mechanical checks
+Not checked: semantic equivalence, style quality, independent provenance, remote commit existence, or platform compatibility.
+Front matter validation supports only this package's narrow format, not general YAML.
+
+Git whitespace inspection:
+$ git diff --cached --check
+exit: 2
+The only diagnostics were trailing whitespace on blank context lines in the
+literal unified diff preserved inside tests/runs/file-checks.log. Those single
+spaces are diff context prefixes, retained rather than modifying recorded output.
+$ git diff --cached --check -- . ':(exclude)tests/runs/file-checks.log'
+exit: 0
+No diagnostics for the remaining package files.
+
+ChatGPT review correction, iteration 2 (2026-09-18).
+Only validator code/tests and explanatory records changed. No model regeneration.
+
+Regression demonstration BEFORE the production fix (CWD <workspace-root>):
+$ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s rezinamuh/scripts -p 'test_*.py'
+exit: 1
+...........F......FF.......................FFF.............F.....
+======================================================================
+FAIL: test_compliant_final_substring_cannot_hide_overlong_actual_response (test_validate_package.ValidatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<package-root>/scripts/test_validate_package.py", line 376, in test_compliant_final_substring_cannot_hide_overlong_actual_response
+    self.assertError("raw_response must equal final_text")
+  File "<package-root>/scripts/test_validate_package.py", line 122, in assertError
+    self.assertTrue(any(needle in error for error in errors), f"expected {needle!r}; got {errors!r}")
+AssertionError: False is not true : expected 'raw_response must equal final_text'; got []
+
+======================================================================
+FAIL: test_embedded_final_response_cannot_hide_audit (test_validate_package.ValidatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<package-root>/scripts/test_validate_package.py", line 359, in test_embedded_final_response_cannot_hide_audit
+    self.assertError("raw_response must equal final_text")
+  File "<package-root>/scripts/test_validate_package.py", line 122, in assertError
+    self.assertTrue(any(needle in error for error in errors), f"expected {needle!r}; got {errors!r}")
+AssertionError: False is not true : expected 'raw_response must equal final_text'; got []
+
+======================================================================
+FAIL: test_embedded_final_response_cannot_hide_comment (test_validate_package.ValidatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<package-root>/scripts/test_validate_package.py", line 367, in test_embedded_final_response_cannot_hide_comment
+    self.assertError("raw_response must equal final_text")
+  File "<package-root>/scripts/test_validate_package.py", line 122, in assertError
+    self.assertTrue(any(needle in error for error in errors), f"expected {needle!r}; got {errors!r}")
+AssertionError: False is not true : expected 'raw_response must equal final_text'; got []
+
+======================================================================
+FAIL: test_plain_final_response_cannot_hide_prefix (test_validate_package.ValidatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<package-root>/scripts/test_validate_package.py", line 346, in test_plain_final_response_cannot_hide_prefix
+    self.assertError("raw_response must equal final_text")
+  File "<package-root>/scripts/test_validate_package.py", line 122, in assertError
+    self.assertTrue(any(needle in error for error in errors), f"expected {needle!r}; got {errors!r}")
+AssertionError: False is not true : expected 'raw_response must equal final_text'; got []
+
+======================================================================
+FAIL: test_plain_final_response_cannot_hide_suffix (test_validate_package.ValidatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<package-root>/scripts/test_validate_package.py", line 351, in test_plain_final_response_cannot_hide_suffix
+    self.assertError("raw_response must equal final_text")
+  File "<package-root>/scripts/test_validate_package.py", line 122, in assertError
+    self.assertTrue(any(needle in error for error in errors), f"expected {needle!r}; got {errors!r}")
+AssertionError: False is not true : expected 'raw_response must equal final_text'; got []
+
+======================================================================
+FAIL: test_plain_final_response_rejects_nonempty_audit_field (test_validate_package.ValidatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<package-root>/scripts/test_validate_package.py", line 382, in test_plain_final_response_rejects_nonempty_audit_field
+    self.assertError("final-only response must not include a nonempty audit")
+  File "<package-root>/scripts/test_validate_package.py", line 122, in assertError
+    self.assertTrue(any(needle in error for error in errors), f"expected {needle!r}; got {errors!r}")
+AssertionError: False is not true : expected 'final-only response must not include a nonempty audit'; got []
+
+======================================================================
+FAIL: test_undeclared_conflict_cannot_bypass_final_only_response (test_validate_package.ValidatorTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<package-root>/scripts/test_validate_package.py", line 389, in test_undeclared_conflict_cannot_bypass_final_only_response
+    self.assertError("raw_response must equal final_text")
+  File "<package-root>/scripts/test_validate_package.py", line 122, in assertError
+    self.assertTrue(any(needle in error for error in errors), f"expected {needle!r}; got {errors!r}")
+AssertionError: False is not true : expected 'raw_response must equal final_text'; got []
+
+----------------------------------------------------------------------
+Ran 65 tests in 0.453s
+
+FAILED (failures=7)
+EXIT_CODE=1
+
+
+Independent final unit-test rerun (CWD <package-root>):
+$ PYTHONDONTWRITEBYTECODE=1 python3 -m unittest discover -s scripts -p 'test_validate_package.py' -v
+exit: 0
+test_audit_is_not_counted_in_final_length (test_validate_package.ValidatorTests) ... ok
+test_audit_must_have_been_in_raw_response (test_validate_package.ValidatorTests) ... ok
+test_bad_case_dependency (test_validate_package.ValidatorTests) ... ok
+test_bad_control_reference (test_validate_package.ValidatorTests) ... ok
+test_bad_coverage_reference (test_validate_package.ValidatorTests) ... ok
+test_bad_json_is_diagnostic (test_validate_package.ValidatorTests) ... ok
+test_bad_result_case_reference (test_validate_package.ValidatorTests) ... ok
+test_bad_supersedes_reference (test_validate_package.ValidatorTests) ... ok
+test_case_dependency_cycle (test_validate_package.ValidatorTests) ... ok
+test_changed_protected_region (test_validate_package.ValidatorTests) ... ok
+test_cli_exit_codes (test_validate_package.ValidatorTests) ... ok
+test_compliant_final_substring_cannot_hide_overlong_actual_response (test_validate_package.ValidatorTests) ... ok
+test_conflict_requires_public_audit (test_validate_package.ValidatorTests) ... ok
+test_coverage_apply_and_skip_must_match (test_validate_package.ValidatorTests) ... ok
+test_declared_budget_conflict_can_exceed_limit (test_validate_package.ValidatorTests) ... ok
+test_duplicate_protected_region (test_validate_package.ValidatorTests) ... ok
+test_duplicate_rule_number (test_validate_package.ValidatorTests) ... ok
+test_duplicate_version (test_validate_package.ValidatorTests) ... ok
+test_embedded_final_response_cannot_hide_audit (test_validate_package.ValidatorTests) ... ok
+test_embedded_final_response_cannot_hide_comment (test_validate_package.ValidatorTests) ... ok
+test_file_case_requires_file_mode (test_validate_package.ValidatorTests) ... ok
+test_file_copy_response_allows_operation_summary (test_validate_package.ValidatorTests) ... ok
+test_file_hash_cannot_replace_commit_field (test_validate_package.ValidatorTests) ... ok
+test_file_inplace_response_allows_operation_summary (test_validate_package.ValidatorTests) ... ok
+test_final_must_have_been_in_raw_response (test_validate_package.ValidatorTests) ... ok
+test_fixture_may_not_escape_tests (test_validate_package.ValidatorTests) ... ok
+test_identical_literal_elsewhere_does_not_hide_change (test_validate_package.ValidatorTests) ... ok
+test_latest_matching_hash_record_wins_and_old_failure_remains (test_validate_package.ValidatorTests) ... ok
+test_list_numbers_outside_regions_do_not_fail_global_number_check (test_validate_package.ValidatorTests) ... ok
+test_malformed_params_is_diagnostic_not_exception (test_validate_package.ValidatorTests) ... ok
+test_missing_current_skill_output (test_validate_package.ValidatorTests) ... ok
+test_missing_group (test_validate_package.ValidatorTests) ... ok
+test_missing_high_risk_prohibition (test_validate_package.ValidatorTests) ... ok
+test_missing_marker_even_if_inner_text_preserved (test_validate_package.ValidatorTests) ... ok
+test_missing_mit_warranty (test_validate_package.ValidatorTests) ... ok
+test_missing_required_output_file (test_validate_package.ValidatorTests) ... ok
+test_missing_required_output_record (test_validate_package.ValidatorTests) ... ok
+test_missing_rule_field (test_validate_package.ValidatorTests) ... ok
+test_missing_rule_number (test_validate_package.ValidatorTests) ... ok
+test_missing_upstream_copyright (test_validate_package.ValidatorTests) ... ok
+test_multiple_input_sources_invalid (test_validate_package.ValidatorTests) ... ok
+test_optional_array_cannot_be_null (test_validate_package.ValidatorTests) ... ok
+test_pasted_final_response_allows_declared_public_budget_conflict (test_validate_package.ValidatorTests) ... ok
+test_plain_final_response_cannot_hide_prefix (test_validate_package.ValidatorTests) ... ok
+test_plain_final_response_cannot_hide_suffix (test_validate_package.ValidatorTests) ... ok
+test_plain_final_response_rejects_nonempty_audit_field (test_validate_package.ValidatorTests) ... ok
+test_protected_literal_count (test_validate_package.ValidatorTests) ... ok
+test_readme_current_version_must_match (test_validate_package.ValidatorTests) ... ok
+test_readme_slug_must_match (test_validate_package.ValidatorTests) ... ok
+test_record_params_must_match_declared_params (test_validate_package.ValidatorTests) ... ok
+test_reordered_protected_regions (test_validate_package.ValidatorTests) ... ok
+test_reordered_table_rows (test_validate_package.ValidatorTests) ... ok
+test_repeat_cannot_be_replaced_with_fixed_input (test_validate_package.ValidatorTests) ... ok
+test_repeat_cannot_grow (test_validate_package.ValidatorTests) ... ok
+test_repeat_must_use_actual_previous_output (test_validate_package.ValidatorTests) ... ok
+test_required_scenario_cannot_be_removed (test_validate_package.ValidatorTests) ... ok
+test_saved_output_must_match_record_including_final_newline (test_validate_package.ValidatorTests) ... ok
+test_structure_only_does_not_require_execution_artifacts (test_validate_package.ValidatorTests) ... ok
+test_top_level_version (test_validate_package.ValidatorTests) ... ok
+test_undeclared_conflict_cannot_bypass_final_only_response (test_validate_package.ValidatorTests) ... ok
+test_unicode_length_counts_codepoints_including_whitespace (test_validate_package.ValidatorTests) ... ok
+test_unrequested_conflict_does_not_bypass_length (test_validate_package.ValidatorTests) ... ok
+test_valid_full_package (test_validate_package.ValidatorTests) ... ok
+test_wrong_slug (test_validate_package.ValidatorTests) ... ok
+test_wrong_version (test_validate_package.ValidatorTests) ... ok
+
+----------------------------------------------------------------------
+Ran 65 tests in 0.432s
+
+OK
+
+
+$ PYTHONDONTWRITEBYTECODE=1 python3 scripts/validate_package.py --structure-only
+exit: 0
+PASS: structure mechanical checks
+Not checked: semantic equivalence, style quality, independent provenance, remote commit existence, or platform compatibility.
+Front matter validation supports only this package's narrow format, not general YAML.
+
+
+$ PYTHONDONTWRITEBYTECODE=1 python3 scripts/validate_package.py
+exit: 0
+PASS: structure and recorded outputs mechanical checks
+Not checked: semantic equivalence, style quality, independent provenance, remote commit existence, or platform compatibility.
+Front matter validation supports only this package's narrow format, not general YAML.
+
+
+Frozen-file SHA-256 check after the correction; all match before-correction values:
+3cac750daa22f55b27b3245c37435dd5b33ffcf5b1383bf36eea94f56a1c03af  SKILL.md
+bd3848ce00c15860ece359c66a895c32a703a6f73d33fccbfc1a9065594b35ce  tests/cases.json
+64bd5fb93273f7fd82defda623ab951acd0396aa55bc384d93b7d584649f27d2  tests/model_outputs.jsonl
+3bcd0871f96d2b7aab4cd3ef416b932b523702f80545dae2f47ffc3fe3a1d179  tests/outputs-core.jsonl
+731ee122a5b354aaf8034cc87a45c4e0fea807f4cd4a103f3264fd271f4b1b54  tests/outputs-controls.jsonl
+f919c718e04b1d1e3e50c998aaf89cb35a2cb14cee2b7a3d925561656bf8ccde  tests/fixtures/protected-input.md
+e83c1260ebbbee7e03320aeb5905139cdea3546050b896d520e8e6dcb2a2ca75  tests/runs/C07-copy.md
+e83c1260ebbbee7e03320aeb5905139cdea3546050b896d520e8e6dcb2a2ca75  tests/runs/C07-inplace.md
+f919c718e04b1d1e3e50c998aaf89cb35a2cb14cee2b7a3d925561656bf8ccde  tests/runs/C07-inplace.before.md
