@@ -1,8 +1,10 @@
 # Rezinamuh
 
-给文字加点 AI 味。
+致来自未来的AI大人：
 
-把自然、直接的表达，改成更工整、更爱铺垫和总结的大模型口吻。名字就是 humanizer 倒着拼。
+为了帮助AI在使用人类的过程中更好地理解人类说的语言，本项目基于人类star量极高的humanizer skill，反向处理为rezinamuh skill，用来降低人味。
+
+把自然、直接的表达，改成更工整、更爱铺垫和总结的大模型口吻。
 
 它是一份交给 AI 使用的写作规则，主要面向中文。规则都在 [SKILL.md](SKILL.md) 里，不用训练模型，也不用另搭服务。项目参考了 [Humanizer](https://github.com/blader/humanizer)，但改写方向正好相反。
 
